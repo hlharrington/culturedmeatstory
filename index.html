@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Cultured Meat Story</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Figtree:wght@400;500;700&display=swap">
+<style>
+/* Layout: a dashed trail winds down the page; seven icons alternate left and right, and each icon reveals its section's text on hover. */
+:root {
+  --bg: #F2F6FB;
+  --card: #FFFFFF;
+  --ink: #12203A;
+  --ink-soft: #4B5B75;
+  --line: #B7C5DA;
+  --c1: #3B82F6;
+  --c2: #E5484D;
+  --c3: #0EA47A;
+  --c4: #4D8A0E;
+  --c5: #F59E0B;
+  --c6: #7C5CFC;
+  --c7: #E8458F;
+  --font-display: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --icon: 148px;
+  --sky: #CBE6FB;
+  --sun: #FFD43B;
+  --cloud: #FFFFFF;
+  --hill1: #BFE2A8;
+  --hill2: #A9D78F;
+  --hill3: #90CC75;
+  --tree: #5FAE5A;
+  --wood: #A9753F;
+  --barn: #D9534F;
+  --barn-roof: #8E2F33;
+  --trim: #FFFFFF;
+  --silo: #E6EDF5;
+  --cow: #FFFFFF;
+  --cow-shade: #DDE3EC;
+  --patch: #2B3447;
+  --pink: #F4A9B0;
+  --dirt: #EBD2A7;
+  --dirt-dash: #F8EBD0;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1A2E;
+    --card: #16263F;
+    --ink: #EDF2FA;
+    --ink-soft: #A8B6CC;
+    --line: #35496B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1A2E;
+  --card: #16263F;
+  --ink: #EDF2FA;
+  --ink-soft: #A8B6CC;
+  --line: #35496B;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sky: #0F1B33;
+    --sun: #E9E6C4;
+    --cloud: #22375A;
+    --hill1: #1B3B46;
+    --hill2: #16333B;
+    --hill3: #112A30;
+    --tree: #2A6046;
+    --wood: #6B4A2B;
+    --barn: #A8403F;
+    --barn-roof: #6D2327;
+    --trim: #E6EBF3;
+    --silo: #8C9BB3;
+    --cow: #E6EBF3;
+    --cow-shade: #B3BDCE;
+    --patch: #1D2433;
+    --pink: #D98F98;
+    --dirt: #5B4C3C;
+    --dirt-dash: #7F6C55;
+  }
+}
+:root[data-theme="dark"] {
+  --sky: #0F1B33;
+  --sun: #E9E6C4;
+  --cloud: #22375A;
+  --hill1: #1B3B46;
+  --hill2: #16333B;
+  --hill3: #112A30;
+  --tree: #2A6046;
+  --wood: #6B4A2B;
+  --barn: #A8403F;
+  --barn-roof: #6D2327;
+  --trim: #E6EBF3;
+  --silo: #8C9BB3;
+  --cow: #E6EBF3;
+  --cow-shade: #B3BDCE;
+  --patch: #1D2433;
+  --pink: #D98F98;
+  --dirt: #5B4C3C;
+  --dirt-dash: #7F6C55;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-block: clamp(36px, 7vw, 84px);
+}
+
+/* Farm scene behind everything */
+.scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.scene svg { display: block; width: 100%; height: 100%; }
+.hero h1, .hero p, .copy h2 {
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--card) 70%, transparent), 0 0 14px color-mix(in srgb, var(--card) 80%, transparent);
+}
+
+/* Header */
+.hero { max-width: 40rem; margin-bottom: clamp(40px, 7vw, 72px); }
+.hero h1 {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 7vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.hero p { margin: 0; font-size: 1.15rem; color: var(--ink-soft); max-width: 34rem; }
+.hero .how {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.hero .how i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c5);
+  color: #12203A;
+  font-style: normal;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+/* Trail */
+.trail { position: relative; }
+.trail-path { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 0; overflow: visible; }
+.trail-path path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.trail-path .dirt { stroke: var(--dirt); stroke-width: 30; }
+.trail-path .dash { stroke: var(--dirt-dash); stroke-width: 3.5; stroke-dasharray: 2 12; }
+.stops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(30px, 5vw, 56px);
+}
+.stop {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--icon) minmax(0, 1fr);
+  column-gap: clamp(20px, 4vw, 44px);
+  align-items: center;
+}
+.stop:nth-child(even) { grid-template-columns: minmax(0, 1fr) var(--icon); }
+.stop:nth-child(even) .icon { order: 2; }
+.stop:nth-child(1) { --c: var(--c1); }
+.stop:nth-child(2) { --c: var(--c2); }
+.stop:nth-child(3) { --c: var(--c3); }
+.stop:nth-child(4) { --c: var(--c4); }
+.stop:nth-child(5) { --c: var(--c5); }
+.stop:nth-child(6) { --c: var(--c6); }
+.stop:nth-child(7) { --c: var(--c7); }
+.stop:nth-child(1) { --d: 0s; }
+.stop:nth-child(2) { --d: -0.7s; }
+.stop:nth-child(3) { --d: -1.4s; }
+.stop:nth-child(4) { --d: -2.1s; }
+.stop:nth-child(5) { --d: -2.8s; }
+.stop:nth-child(6) { --d: -0.35s; }
+.stop:nth-child(7) { --d: -1.05s; }
+
+/* Icon button */
+.icon {
+  position: relative;
+  isolation: isolate;
+  width: var(--icon);
+  height: var(--icon);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 12px color-mix(in srgb, var(--c) 45%, transparent));
+  animation: bob 4.6s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+.icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: 0;
+  animation: halo 3.4s ease-out infinite;
+  animation-delay: var(--d, 0s);
+}
+.icon:hover svg,
+.stop.open .icon svg { animation-play-state: paused; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes halo {
+  0% { transform: scale(0.96); opacity: 0.45; }
+  75%, 100% { transform: scale(1.4); opacity: 0; }
+}
+.icon:hover,
+.stop.open .icon {
+  transform: scale(1.06) rotate(-3deg);
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--c) 24%, transparent);
+}
+.icon:focus-visible { outline: 3px solid var(--ink); outline-offset: 6px; }
+.icon .disc { fill: var(--c); }
+.icon .ring { stroke: var(--c); stroke-width: 3; }
+.icon text { font-family: var(--font-display); font-weight: 800; text-anchor: middle; }
+.badge {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  border: 3px solid var(--card);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.stop:nth-child(even) .badge { left: auto; right: -2px; }
+
+/* Copy + reveal */
+.copy { min-width: 0; }
+.copy h2 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.55rem, 3.2vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.reveal { display: grid; }
+.reveal > * { grid-area: 1 / 1; }
+.body {
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--c) 13%, var(--card));
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.body p { margin: 0 0 0.8em; max-width: 52ch; }
+.body p:last-child { margin-bottom: 0; }
+
+.icon:hover + .copy .body,
+.icon:focus-visible + .copy .body,
+.stop.open .body {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* Land use chart */
+.land {
+  margin: 14px 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+}
+.land figcaption {
+  flex-basis: 100%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.land svg { width: 160px; height: 160px; flex: none; }
+.land svg path { stroke: var(--card); stroke-width: 2; }
+.land svg text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  fill: #fff;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.land ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.land li { display: flex; align-items: center; gap: 10px; font-size: 0.98rem; }
+.land li i { width: 14px; height: 14px; border-radius: 3px; flex: none; }
+.land li b { font-variant-numeric: tabular-nums; }
+
+/* Lab mini game: one panel per step, same flat style as the trail */
+.s1 { --c: var(--c2); --btn: #C53A3F; --on: #fff; }
+.s2 { --c: var(--c3); --btn: #0A7D5C; --on: #fff; }
+.s3 { --c: var(--c6); --btn: #6A4BE0; --on: #fff; }
+.s4 { --c: var(--c5); --btn: #F59E0B; --on: #12203A; }
+.s5 { --c: var(--c7); --btn: #C8337A; --on: #fff; }
+
+.lab {
+  margin-top: clamp(56px, 9vw, 104px);
+  padding: clamp(20px, 4vw, 40px);
+  border-radius: 28px;
+  background: var(--card);
+  box-shadow: 0 10px 0 color-mix(in srgb, var(--ink) 14%, transparent);
+}
+.lab-head { display: grid; gap: 8px; max-width: 40rem; margin-bottom: 24px; }
+.lab-tag {
+  justify-self: start;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--c5);
+  color: #12203A;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.lab-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.4vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.lab-head p { margin: 0; color: var(--ink-soft); }
+
+.steps {
+  list-style: none;
+  margin: 0 0 clamp(22px, 3vw, 34px);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.steps li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 6px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.steps li::before {
+  content: "";
+  position: absolute;
+  top: 17px;
+  right: 50%;
+  width: calc(100% + 8px);
+  height: 4px;
+  background: var(--line);
+}
+.steps li:first-child::before { display: none; }
+.steps li.done::before,
+.steps li.current::before { background: var(--btn); }
+.steps li.current { color: var(--ink); }
+.dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+  background: var(--card);
+  color: var(--ink-soft);
+  font-weight: 800;
+  font-size: 1rem;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.steps li.current .dot,
+.steps li.done .dot {
+  background: var(--btn);
+  border-color: var(--btn);
+  color: var(--on);
+}
+.steps li.current .dot { box-shadow: 0 0 0 6px color-mix(in srgb, var(--btn) 26%, transparent); }
+.tick { display: none; width: 18px; height: 18px; }
+.steps li.done .tick { display: block; }
+.steps li.done .num { display: none; }
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 44px);
+  align-items: center;
+}
+.panel[hidden] { display: none; }
+.art {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--c) 16%, var(--card));
+}
+.art > svg { display: block; width: 100%; height: auto; }
+.talk { display: grid; gap: 14px; align-content: center; min-width: 0; }
+.talk h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.talk h3:focus { outline: none; }
+.talk p { margin: 0; max-width: 46ch; }
+.job {
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--c) 15%, var(--card));
+}
+.job b { font-family: var(--font-display); }
+.actions, .foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.fb { font-weight: 700; min-height: 1.6em; }
+.foot { min-height: 52px; }
+.stat {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c) 18%, var(--card));
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--btn);
+  color: var(--on);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--btn) 58%, #000);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:hover:not(:disabled) { transform: translateY(-1px); }
+.btn:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--btn) 58%, #000); }
+.btn:disabled { opacity: 0.5; cursor: default; box-shadow: none; }
+.btn.soft {
+  background: color-mix(in srgb, var(--btn) 16%, var(--card));
+  color: var(--ink);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--btn) 30%, transparent);
+}
+.btn:focus-visible, .target:focus-visible, .fiber:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* Step 1: cow, sample spot, vial */
+.target {
+  position: absolute;
+  left: 60.2%;
+  top: 57.2%;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  padding: 0;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: var(--btn);
+  color: #fff;
+  cursor: pointer;
+}
+.target svg { width: 24px; height: 24px; }
+.target .ok { display: none; }
+.target::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: 50%;
+  border: 3px solid var(--btn);
+  animation: ping 1.8s ease-out infinite;
+}
+.target:disabled { cursor: default; background: #0A7D5C; }
+.target:disabled::before { animation: none; opacity: 0; }
+.s1.got .target .plus { display: none; }
+.s1.got .target .ok { display: block; }
+@keyframes ping { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.8); opacity: 0; } }
+.vial-liq {
+  fill: #FF7A8A;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+  transition: transform 0.7s ease;
+}
+.s1.got .vial-liq { transform: scaleY(1); }
+
+/* Step 2: bioreactor */
+.cell {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.cell.on { transform: scale(1); }
+.cell circle:first-child { fill: #FF7A8A; stroke: #fff; stroke-width: 1.5; }
+.cell .nuc { fill: #C2305A; }
+.drop { fill: #F59E0B; opacity: 0; }
+.drop.fall { animation: fall 0.7s ease-in forwards; }
+@keyframes fall {
+  0% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(46px); }
+}
+
+/* Step 3: scaffold strands */
+.fibers { display: grid; gap: 12px; align-content: center; padding: clamp(16px, 3vw, 24px); min-height: 270px; }
+.fiber {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 0 18px;
+  border: 3px dashed var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 8%, var(--card));
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+}
+.fiber:hover:not(:disabled) { border-color: var(--btn); }
+.fiber .fill {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: radial-gradient(circle at 8px 50%, #D85870 2.6px, transparent 3px) 0 0 / 16px 100%, #C93C55;
+  transition: width 0.7s ease;
+}
+.fiber .lbl { position: relative; z-index: 1; line-height: 40px; transition: color 0.2s 0.3s; }
+.fiber:disabled { cursor: default; }
+.fiber.done { border-style: solid; border-color: #C93C55; color: #fff; }
+.fiber.done .fill { width: 100%; }
+
+/* Step 4: griddle and meter */
+.patty { fill: #F4A0A8; stroke: rgba(0, 0, 0, 0.22); stroke-width: 3; }
+.steam path { fill: none; stroke: var(--ink-soft); stroke-width: 4; stroke-linecap: round; animation: puff 2.4s ease-in-out infinite; }
+.steam path:nth-child(2) { animation-delay: -0.8s; }
+.steam path:nth-child(3) { animation-delay: -1.6s; }
+@keyframes puff {
+  0%, 100% { opacity: 0.15; transform: translateY(5px); }
+  50% { opacity: 0.6; transform: translateY(-4px); }
+}
+.meter { position: relative; padding: 7px 0; }
+.bar { display: flex; height: 22px; border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; }
+.z-raw { flex: 45 0 0; background: #F4A0A8; }
+.z-ok { flex: 25 0 0; background: var(--c3); }
+.z-over { flex: 30 0 0; background: #7A4A33; }
+.marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  margin-left: -4px;
+  border-radius: 4px;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--card);
+}
+.zones { display: flex; font-size: 0.8rem; color: var(--ink-soft); text-align: center; }
+.zones span:nth-child(1) { flex: 45 0 0; }
+.zones span:nth-child(2) { flex: 25 0 0; color: var(--ink); font-weight: 700; }
+.zones span:nth-child(3) { flex: 30 0 0; }
+
+/* Step 5: served */
+.sparkle { fill: #FFD43B; }
+.recap { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.recap li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; align-items: start; }
+.chk {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--btn);
+  color: var(--on);
+}
+.chk .tick { display: block; width: 16px; height: 16px; }
+.recap b { font-family: var(--font-display); }
+.note { padding: 10px 14px; border-radius: 14px; background: color-mix(in srgb, var(--c) 15%, var(--card)); }
+
+@media (max-width: 720px) {
+  .panel { grid-template-columns: minmax(0, 1fr); }
+  .steps li { font-size: 0.8rem; }
+  .dot { width: 34px; height: 34px; }
+  .steps li::before { top: 15px; }
+  .fibers { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .target::before, .steam path { animation: none; }
+  .cell, .fiber .fill, .vial-liq { transition: none; }
+  .drop.fall { animation-duration: 0.01s; }
+}
+
+/* Phone: icon beside the heading, text underneath at full width */
+@media (max-width: 620px) {
+  :root { --icon: 84px; }
+  .stop,
+  .stop:nth-child(even) {
+    grid-template-columns: var(--icon) minmax(0, 1fr);
+    column-gap: 16px;
+    row-gap: 12px;
+  }
+  .stop:nth-child(even) .icon { order: 0; }
+  .stop:nth-child(even) .badge { left: -2px; right: auto; }
+  .badge { width: 30px; height: 30px; font-size: 0.95rem; }
+  .copy { display: contents; }
+  .copy h2 { grid-column: 2; grid-row: 1; margin: 0; align-self: center; }
+  .reveal { grid-column: 1 / -1; grid-row: 2; }
+  .body { padding: 16px 18px; }
+  .land svg { width: 140px; height: 140px; }
+  .trail-path .dirt { stroke-width: 20; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon, .body { transition: none; }
+  .icon svg, .icon::before { animation: none; }
+  .icon:hover, .stop.open .icon { transform: none; }
+}
+</style>
+
+<div class="scene" aria-hidden="true">
+  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" focusable="false">
+    <defs>
+      <g id="cloud">
+        <circle cx="30" cy="34" r="22"/>
+        <circle cx="62" cy="24" r="28"/>
+        <circle cx="96" cy="34" r="20"/>
+        <rect x="10" y="34" width="106" height="22" rx="11"/>
+      </g>
+      <g id="tree">
+        <rect x="-4" y="30" width="8" height="40" fill="var(--wood)"/>
+        <circle cx="0" cy="18" r="32" fill="var(--tree)"/>
+        <circle cx="-18" cy="34" r="22" fill="var(--tree)"/>
+        <circle cx="18" cy="34" r="22" fill="var(--tree)"/>
+      </g>
+      <g id="cow">
+        <path d="M12 30C2 32 0 44 4 56" fill="none" stroke="var(--patch)" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="4" cy="58" r="4.5" fill="var(--patch)"/>
+        <rect x="16" y="50" width="10" height="26" rx="3.5" fill="var(--cow-shade)"/>
+        <rect x="30" y="50" width="10" height="26" rx="3.5" fill="var(--cow-shade)"/>
+        <rect x="62" y="50" width="10" height="26" rx="3.5" fill="var(--cow-shade)"/>
+        <rect x="76" y="50" width="10" height="26" rx="3.5" fill="var(--cow-shade)"/>
+        <rect x="16" y="70" width="10" height="6" rx="2" fill="var(--patch)"/>
+        <rect x="30" y="70" width="10" height="6" rx="2" fill="var(--patch)"/>
+        <rect x="62" y="70" width="10" height="6" rx="2" fill="var(--patch)"/>
+        <rect x="76" y="70" width="10" height="6" rx="2" fill="var(--patch)"/>
+        <ellipse cx="54" cy="62" rx="8" ry="5" fill="var(--pink)"/>
+        <rect x="10" y="22" width="80" height="40" rx="18" fill="var(--cow)"/>
+        <ellipse cx="30" cy="35" rx="11" ry="8" fill="var(--patch)"/>
+        <ellipse cx="62" cy="46" rx="11" ry="8" fill="var(--patch)"/>
+        <rect x="82" y="18" width="32" height="28" rx="11" fill="var(--cow)"/>
+        <rect x="98" y="30" width="18" height="17" rx="8" fill="var(--pink)"/>
+        <circle cx="105" cy="38" r="1.8" fill="var(--patch)"/>
+        <circle cx="111" cy="38" r="1.8" fill="var(--patch)"/>
+        <circle cx="95" cy="29" r="2.4" fill="var(--patch)"/>
+        <ellipse cx="89" cy="22" rx="7" ry="4" fill="var(--patch)" transform="rotate(-25 89 22)"/>
+        <rect x="92" y="10" width="4" height="9" rx="2" fill="#F2E3B3"/>
+      </g>
+      <pattern id="fence" width="48" height="34" patternUnits="userSpaceOnUse">
+        <rect x="4" y="0" width="7" height="34" rx="2" fill="var(--wood)"/>
+        <rect x="0" y="8" width="48" height="5" fill="var(--wood)"/>
+        <rect x="0" y="21" width="48" height="5" fill="var(--wood)"/>
+      </pattern>
+    </defs>
+
+    <rect width="1600" height="900" fill="var(--sky)"/>
+    <circle cx="1290" cy="150" r="96" fill="var(--sun)" opacity=".25"/>
+    <circle cx="1290" cy="150" r="62" fill="var(--sun)"/>
+    <g fill="var(--cloud)">
+      <use href="#cloud" transform="translate(150 110) scale(1.6)"/>
+      <use href="#cloud" transform="translate(640 60) scale(1.1)"/>
+      <use href="#cloud" transform="translate(980 230) scale(1.4)"/>
+      <use href="#cloud" transform="translate(1420 300) scale(.9)"/>
+    </g>
+
+    <path d="M0 560C240 480 460 520 720 566S1160 470 1600 540V900H0Z" fill="var(--hill1)"/>
+
+    <g transform="translate(150 405) scale(1.05)">
+      <rect x="124" y="30" width="34" height="95" fill="var(--silo)"/>
+      <path d="M124 30a17 17 0 0 1 34 0z" fill="var(--barn-roof)"/>
+      <path d="M124 56h34M124 80h34M124 104h34" stroke="var(--cow-shade)" stroke-width="2" opacity=".7"/>
+      <rect x="0" y="42" width="120" height="83" fill="var(--barn)"/>
+      <path d="M-8 46L18 12H102L128 46Z" fill="var(--barn-roof)"/>
+      <rect x="48" y="22" width="24" height="18" fill="var(--trim)"/>
+      <rect x="34" y="70" width="52" height="55" fill="var(--trim)"/>
+      <path d="M34 70L86 125M86 70L34 125" stroke="var(--barn)" stroke-width="5"/>
+      <rect x="36.5" y="72.5" width="47" height="50" fill="none" stroke="var(--barn)" stroke-width="5"/>
+    </g>
+
+    <use href="#tree" transform="translate(940 505) scale(.9)"/>
+    <use href="#tree" transform="translate(1010 500) scale(1.1)"/>
+    <use href="#tree" transform="translate(1460 470) scale(1)"/>
+    <use href="#tree" transform="translate(520 500) scale(.8)"/>
+
+    <path d="M0 660C300 600 600 650 900 628S1400 596 1600 648V900H0Z" fill="var(--hill2)"/>
+
+    <use href="#cow" transform="translate(540 602) scale(.55)"/>
+    <use href="#cow" transform="translate(700 612) scale(-.5 .5)"/>
+    <use href="#cow" transform="translate(1120 590) scale(.55)"/>
+    <use href="#cow" transform="translate(1300 604) scale(-.5 .5)"/>
+
+    <path d="M0 752C380 708 780 756 1180 724S1500 716 1600 736V900H0Z" fill="var(--hill3)"/>
+
+    <g>
+      <circle cx="120" cy="846" r="4" fill="#fff"/><circle cx="120" cy="846" r="1.6" fill="#FFD43B"/>
+      <circle cx="170" cy="868" r="4" fill="#fff"/><circle cx="170" cy="868" r="1.6" fill="#FFD43B"/>
+      <circle cx="520" cy="850" r="4" fill="#FFD43B"/><circle cx="520" cy="850" r="1.6" fill="#fff"/>
+      <circle cx="640" cy="872" r="4" fill="#fff"/><circle cx="640" cy="872" r="1.6" fill="#FFD43B"/>
+      <circle cx="1060" cy="858" r="4" fill="#FFD43B"/><circle cx="1060" cy="858" r="1.6" fill="#fff"/>
+      <circle cx="1180" cy="876" r="4" fill="#fff"/><circle cx="1180" cy="876" r="1.6" fill="#FFD43B"/>
+      <circle cx="1500" cy="850" r="4" fill="#fff"/><circle cx="1500" cy="850" r="1.6" fill="#FFD43B"/>
+    </g>
+
+    <rect x="0" y="770" width="1600" height="34" fill="url(#fence)"/>
+
+    <use href="#cow" transform="translate(250 782) scale(1.15)"/>
+    <use href="#cow" transform="translate(790 800) scale(.95)"/>
+    <use href="#cow" transform="translate(1000 826) scale(.55)"/>
+    <use href="#cow" transform="translate(1380 790) scale(-1.05 1.05)"/>
+  </svg>
+</div>
+
+<div class="page">
+  <header class="hero">
+    <h1>Cultured meat, in seven stops</h1>
+    <p>From a hungry planet to a hybrid burger. Follow the dirt trail from the top, and hover over (or tap) each glowing icon to read its stop.</p>
+    <span class="how"><i>1</i> Start at stop one and work down</span>
+  </header>
+
+  <div class="trail" id="trail">
+    <svg class="trail-path" id="trailPath" aria-hidden="true"><path class="dirt" d=""/><path class="dash" d=""/></svg>
+    <ol class="stops">
+
+      <!-- 1 -->
+      <li class="stop">
+        <button class="icon" type="button" aria-expanded="false" aria-label="Stop 1, A hungry planet. Hover, focus or press to read.">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="disc" cx="60" cy="60" r="58"/>
+            <circle cx="56" cy="56" r="32" fill="#DCEBFF"/>
+            <path d="M36 46c5-9 15-12 22-8 5 3 2 8-3 10-6 2-6 8-12 9-5 1-12-4-7-11z" fill="#43B26B"/>
+            <path d="M60 64c7-3 15 1 14 9-1 7-6 11-10 12-4-5-5-9-7-13-1-3 0-6 3-8z" fill="#43B26B"/>
+            <path d="M72 36c6 1 10 5 10 10-5 2-9 0-12-3-2-3-1-6 2-7z" fill="#43B26B"/>
+            <path class="ring" d="M70 88c0-9 8-15 17-13 8 2 12 10 8 17s-14 9-21 6-4-6-4-10z" fill="#E5484D"/>
+            <path d="M77 85c1-5 6-8 11-6s6 7 3 11-8 4-11 2-3-3-3-7z" fill="#FF9A8F"/>
+            <circle cx="87" cy="85" r="3.6" fill="#fff"/>
+          </svg>
+          <span class="badge" aria-hidden="true">1</span>
+        </button>
+        <div class="copy">
+          <h2>A hungry planet</h2>
+          <div class="reveal">
+            <div class="body">
+              <p>Meat is a staple in the diets of many people around the world, and as the global population increases, so does meat’s demand.</p>
+              <p>Unfortunately, the production of meat is very bad for the environment. Around half of all habitable land on the planet is used for agriculture. Of that half, three quarters are used just for livestock to make meat!</p>
+              <figure class="land">
+                <figcaption>Earth’s habitable land use</figcaption>
+                <svg viewBox="0 0 160 160" role="img" aria-label="Pie chart of Earth's habitable land use: non-agriculture 50 percent, livestock 35 percent, crop agriculture 15 percent.">
+                  <path d="M80 80L80 10A70 70 0 0 1 80 150Z" fill="var(--c1)"/>
+                  <path d="M80 80L80 150A70 70 0 0 1 23.37 38.86Z" fill="var(--c2)"/>
+                  <path d="M80 80L23.37 38.86A70 70 0 0 1 80 10Z" fill="var(--c4)"/>
+                  <text x="122" y="80">50%</text>
+                  <text x="40" y="100">35%</text>
+                  <text x="60" y="40">15%</text>
+                </svg>
+                <ul>
+                  <li><i style="background:var(--c1)"></i>Non-agriculture <b>50%</b></li>
+                  <li><i style="background:var(--c2)"></i>Livestock <b>35%</b></li>
+                  <li><i style="background:var(--c4)"></i>Crop agriculture <b>15%</b></li>
+                </ul>
+              </figure>
+              <p>The amount of land used is even larger than the area of the United States, China and India combined!</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 2 -->
+      <li class="stop">
+        <button class="icon" type="button" aria-expanded="false" aria-label="Stop 2, Life on factory farms. Hover, focus or press to read.">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="disc" cx="60" cy="60" r="58"/>
+            <rect x="80" y="30" width="10" height="24" fill="#FFE1E1"/>
+            <circle cx="85" cy="24" r="5" fill="#fff" opacity=".85"/>
+            <circle cx="93" cy="17" r="4" fill="#fff" opacity=".7"/>
+            <path d="M20 60V47l19 13V47l19 13V47l19 13V47l22 13z" fill="#FFD0D0"/>
+            <rect x="20" y="60" width="80" height="34" fill="#fff"/>
+            <rect x="52" y="70" width="16" height="24" fill="#E5484D"/>
+            <rect x="28" y="68" width="14" height="9" rx="1.5" fill="#FF9C9C"/>
+            <rect x="78" y="68" width="14" height="9" rx="1.5" fill="#FF9C9C"/>
+            <rect x="20" y="94" width="80" height="4" rx="2" fill="#B3262B"/>
+          </svg>
+          <span class="badge" aria-hidden="true">2</span>
+        </button>
+        <div class="copy">
+          <h2>Life on factory farms</h2>
+          <div class="reveal">
+            <div class="body">
+              <p>In order to produce large amounts of meat, livestock are made to live in cramped and dirty conditions on large factory farms. This causes the animals to become stressed and ill.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 3 -->
+      <li class="stop">
+        <button class="icon" type="button" aria-expanded="false" aria-label="Stop 3, Meat grown in a lab. Hover, focus or press to read.">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="disc" cx="60" cy="60" r="58"/>
+            <path d="M52 24h16v22l22 42q3 8-6 8H36q-9 0-6-8l22-42z" fill="#fff"/>
+            <path d="M39 72h42l9 16q3 8-6 8H36q-9 0-6-8z" fill="#FF8FA3"/>
+            <rect x="47" y="20" width="26" height="7" rx="3.5" fill="#fff"/>
+            <rect x="56" y="30" width="4" height="14" rx="2" fill="#D9F3EA"/>
+            <circle cx="52" cy="84" r="5" fill="#fff" opacity=".85"/>
+            <circle cx="66" cy="88" r="3.5" fill="#fff" opacity=".85"/>
+            <circle cx="62" cy="78" r="2.5" fill="#fff" opacity=".85"/>
+            <circle cx="60" cy="60" r="3" fill="#BFEFE0"/>
+            <circle cx="64" cy="51" r="2" fill="#BFEFE0"/>
+          </svg>
+          <span class="badge" aria-hidden="true">3</span>
+        </button>
+        <div class="copy">
+          <h2>Meat grown in a lab</h2>
+          <div class="reveal">
+            <div class="body">
+              <p>Thankfully, scientists are working on an incredible method to make meat that doesn’t have the same problems. Using cells harmlessly collected from animals, meat can be grown in a lab.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 4 -->
+      <li class="stop">
+        <button class="icon" type="button" aria-expanded="false" aria-label="Stop 4, Why cultured meat. Hover, focus or press to read.">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="disc" cx="60" cy="60" r="58"/>
+            <clipPath id="landClip"><circle cx="60" cy="60" r="58"/></clipPath>
+            <g clip-path="url(#landClip)">
+              <circle cx="86" cy="34" r="12" fill="#FFD43B"/>
+              <path d="M0 78C25 58 45 58 70 70S105 72 120 62V120H0Z" fill="#CDEB9A"/>
+              <rect x="30" y="56" width="5" height="14" fill="#7A4A2B"/>
+              <circle cx="32.5" cy="50" r="11" fill="#2F7D32"/>
+              <path d="M0 92C30 74 60 78 85 88S110 90 120 84V120H0Z" fill="#A5D65A"/>
+              <path d="M12 104Q58 86 108 102M26 114Q62 100 104 112" fill="none" stroke="#6FA832" stroke-width="4" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <span class="badge" aria-hidden="true">4</span>
+        </button>
+        <div class="copy">
+          <h2>Why cultured meat?</h2>
+          <div class="reveal">
+            <div class="body">
+              <p>This technology is often called cultured meat, and it has many advantages over normal meat. It requires 90% less land area and water usage and can even produce meat faster than normal farming. Because only meat is grown by the cells, no animals need to be slaughtered in order for it to be produced.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 5 -->
+      <li class="stop">
+        <button class="icon" type="button" aria-expanded="false" aria-label="Stop 5, The cost problem. Hover, focus or press to read.">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="disc" cx="60" cy="60" r="58"/>
+            <path d="M24 40h12l8 34h42l8-26H40" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40 48h54l-8 26H44z" fill="#fff"/>
+            <path d="M54 54v14M67 54v14M80 54v14" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="50" cy="86" r="6" fill="#fff"/>
+            <circle cx="82" cy="86" r="6" fill="#fff"/>
+            <circle class="ring" cx="68" cy="32" r="15" fill="#FFD43B"/>
+            <text x="68" y="39" font-size="20" fill="#8A5300">$</text>
+          </svg>
+          <span class="badge" aria-hidden="true">5</span>
+        </button>
+        <div class="copy">
+          <h2>The cost problem</h2>
+          <div class="reveal">
+            <div class="body">
+              <p>The equipment and ingredients needed to create the cultured meat are expensive and hard to make in large amounts. Until scientists come up with better technology, it is unlikely that you will see it in the store.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 6 -->
+      <li class="stop">
+        <button class="icon" type="button" aria-expanded="false" aria-label="Stop 6, Will people eat it. Hover, focus or press to read.">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="disc" cx="60" cy="60" r="58"/>
+            <circle cx="48" cy="72" r="24" fill="#FFD43B"/>
+            <circle cx="40" cy="69" r="3.2" fill="#3B1F7A"/>
+            <circle cx="57" cy="69" r="3.2" fill="#3B1F7A"/>
+            <path d="M32 62l13-5M52 57l12 5" stroke="#3B1F7A" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M38 84q10-4 20-1" stroke="#3B1F7A" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <circle cx="68" cy="54" r="3" fill="#fff"/>
+            <circle cx="74" cy="47" r="4.5" fill="#fff"/>
+            <circle cx="88" cy="34" r="16" fill="#fff"/>
+            <text x="88" y="41" font-size="22" fill="#6A46E0">?</text>
+          </svg>
+          <span class="badge" aria-hidden="true">6</span>
+        </button>
+        <div class="copy">
+          <h2>Will people eat it?</h2>
+          <div class="reveal">
+            <div class="body">
+              <p>There is also concern of how willing people will be to eat cultured meat. Despite the advantages, being made in a lab attracts many strong judgments from consumers.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 7 -->
+      <li class="stop">
+        <button class="icon" type="button" aria-expanded="false" aria-label="Stop 7, The hybrid solution. Hover, focus or press to read.">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="disc" cx="60" cy="60" r="58"/>
+            <g transform="translate(0 6)">
+              <path d="M30 50Q30 30 60 30Q90 30 90 50z" fill="#FFC773"/>
+              <ellipse cx="46" cy="41" rx="3" ry="1.8" fill="#fff" transform="rotate(-20 46 41)"/>
+              <ellipse cx="60" cy="37" rx="3" ry="1.8" fill="#fff"/>
+              <ellipse cx="74" cy="41" rx="3" ry="1.8" fill="#fff" transform="rotate(20 74 41)"/>
+              <path d="M27 52q6 7 12 0t12 0t12 0t12 0t12 0v5H27z" fill="#7BD389"/>
+              <rect x="28" y="58" width="64" height="13" rx="6.5" fill="#7A3E2E"/>
+              <circle cx="40" cy="64" r="1.9" fill="#8FD694"/>
+              <circle cx="54" cy="66" r="1.9" fill="#8FD694"/>
+              <circle cx="68" cy="63" r="1.9" fill="#8FD694"/>
+              <circle cx="80" cy="66" r="1.9" fill="#8FD694"/>
+              <circle cx="47" cy="62" r="1.9" fill="#FF9A8F"/>
+              <circle cx="61" cy="65" r="1.9" fill="#FF9A8F"/>
+              <circle cx="74" cy="68" r="1.9" fill="#FF9A8F"/>
+              <path d="M30 74h60q0 12-12 12H42q-12 0-12-12z" fill="#FFC773"/>
+            </g>
+            <circle cx="88" cy="27" r="12" fill="#fff"/>
+            <text x="88" y="33" font-size="17" fill="#C2307A">?</text>
+          </svg>
+          <span class="badge" aria-hidden="true">7</span>
+        </button>
+        <div class="copy">
+          <h2>The hybrid solution</h2>
+          <div class="reveal">
+            <div class="body">
+              <p>To solve these issues, companies are exploring making hybrid cultured meat products. These products contain only a small amount of cultured animal products which are combined with plant-based ingredients to lower the price but better the flavor of plant-based products. Would you try a hybrid cultured meat product?</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+
+  <section class="lab" id="lab" aria-labelledby="labTitle">
+    <header class="lab-head">
+      <span class="lab-tag">Mini game</span>
+      <h2 id="labTitle">Your turn: grow a burger</h2>
+      <p>Scientists make cultured meat in four main steps. Play through them in order to grow your own.</p>
+    </header>
+
+    <ol class="steps" aria-label="Game progress">
+      <li class="s1 current" aria-current="step"><span class="dot"><span class="num">1</span><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Collect</li>
+      <li class="s2"><span class="dot"><span class="num">2</span><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Grow</li>
+      <li class="s3"><span class="dot"><span class="num">3</span><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Build</li>
+      <li class="s4"><span class="dot"><span class="num">4</span><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cook</li>
+    </ol>
+
+    <!-- Step 1: collect -->
+    <div class="panel s1" id="p1">
+      <div class="art">
+        <svg viewBox="0 0 240 185" role="img" aria-label="A cow standing in a field, with an empty sample vial in the corner.">
+          <rect y="162" width="240" height="23" fill="var(--hill2)"/>
+          <g transform="translate(8 8)">
+            <rect x="14" y="12" width="30" height="9" rx="3" fill="var(--btn)"/>
+            <path d="M18 21h22v42a11 11 0 0 1-22 0z" fill="var(--card)" stroke="var(--ink)" stroke-width="3"/>
+            <path class="vial-liq" d="M20.5 40h17v23a8.5 8.5 0 0 1-17 0z"/>
+          </g>
+          <use href="#cow" transform="translate(36 50) scale(1.55)"/>
+        </svg>
+        <button class="target" id="sampleBtn" type="button" aria-label="Collect a cell sample from the cow">
+          <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
+          <svg class="ok" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="talk">
+        <h3 tabindex="-1">Collect a few cells</h3>
+        <p>Scientists start with a tiny sample of cells from a cow. The cow isn't hurt and stays on the farm.</p>
+        <p class="job"><b>Your job:</b> tap the glowing spot on the cow to collect the sample.</p>
+        <div class="foot">
+          <p class="fb" id="fb1" role="status" aria-live="polite"></p>
+          <button class="btn next" type="button" id="next1" hidden>Next step &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: grow -->
+    <div class="panel s2" id="p2" hidden>
+      <div class="art">
+        <svg viewBox="0 0 240 185" role="img" aria-label="A glass tank of warm broth. Cells inside it multiply each time broth is added.">
+          <rect x="40" y="160" width="160" height="16" rx="6" fill="var(--ink)"/>
+          <text x="120" y="172" text-anchor="middle" font-family="var(--font-display)" font-weight="800" font-size="10" fill="var(--bg)">WARM 37 &deg;C</text>
+          <rect x="150" y="6" width="10" height="26" rx="3" fill="var(--ink-soft)"/>
+          <rect x="56" y="40" width="128" height="122" rx="14" fill="var(--card)" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="60" y="66" width="120" height="92" rx="10" fill="#F7C65B" opacity=".55"/>
+          <rect x="48" y="30" width="144" height="14" rx="6" fill="var(--btn)"/>
+          <g id="cells"></g>
+          <circle class="drop" id="drop" cx="155" cy="38" r="5"/>
+        </svg>
+      </div>
+      <div class="talk">
+        <h3 tabindex="-1">Feed the cells</h3>
+        <p>Cells need food to grow. Scientists put them in a warm tank called a bioreactor and add a nutrient broth. Each feeding lets the cells split and double.</p>
+        <p class="job"><b>Your job:</b> add broth until the tank holds 32 cells.</p>
+        <div class="actions">
+          <button class="btn" type="button" id="feedBtn">Add nutrient broth</button>
+          <p class="stat">Cells in the tank: <b id="cellCount">1</b></p>
+        </div>
+        <div class="foot">
+          <p class="fb" id="fb2" role="status" aria-live="polite"></p>
+          <button class="btn next" type="button" id="next2" hidden>Next step &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: build -->
+    <div class="panel s3" id="p3" hidden>
+      <div class="art fibers" id="fibers">
+        <button class="fiber" type="button"><span class="fill"></span><span class="lbl">Strand 1 &middot; tap to add cells</span></button>
+        <button class="fiber" type="button"><span class="fill"></span><span class="lbl">Strand 2 &middot; tap to add cells</span></button>
+        <button class="fiber" type="button"><span class="fill"></span><span class="lbl">Strand 3 &middot; tap to add cells</span></button>
+        <button class="fiber" type="button"><span class="fill"></span><span class="lbl">Strand 4 &middot; tap to add cells</span></button>
+        <button class="fiber" type="button"><span class="fill"></span><span class="lbl">Strand 5 &middot; tap to add cells</span></button>
+      </div>
+      <div class="talk">
+        <h3 tabindex="-1">Build on a scaffold</h3>
+        <p>Muscle cells need something to hold onto, like a tiny jungle gym called a scaffold. As the cells stick to it, they line up and grow into muscle fibers.</p>
+        <p class="job"><b>Your job:</b> tap each dashed strand to grow muscle on it.</p>
+        <p class="stat">Fibers grown: <b id="grown">0</b> of 5</p>
+        <div class="foot">
+          <p class="fb" id="fb3" role="status" aria-live="polite"></p>
+          <button class="btn next" type="button" id="next3" hidden>Next step &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: cook -->
+    <div class="panel s4" id="p4" hidden>
+      <div class="art">
+        <svg viewBox="0 0 240 185" role="img" aria-label="A patty on a hot griddle. Its color changes from pink to brown to dark as it cooks.">
+          <g class="steam"><path d="M92 36c-9-9 9-14 0-26"/><path d="M120 36c-9-9 9-14 0-26"/><path d="M148 36c-9-9 9-14 0-26"/></g>
+          <rect x="22" y="46" width="196" height="122" rx="18" fill="#2B3447" stroke="var(--ink)" stroke-width="3"/>
+          <path d="M40 80h160M40 108h160M40 136h160" stroke="#4A5873" stroke-width="5" stroke-linecap="round"/>
+          <circle class="patty" id="patty" cx="120" cy="108" r="46"/>
+          <path d="M92 92q14-14 36-12" stroke="#fff" stroke-opacity=".35" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="talk">
+        <h3 tabindex="-1">Cook and serve</h3>
+        <p>Finally, the grown muscle is pressed into a patty and cooked, just like any other burger.</p>
+        <p class="job"><b>Your job:</b> start cooking, then press Stop while the marker is in the green zone.</p>
+        <div>
+          <div class="meter">
+            <div class="bar"><i class="z-raw"></i><i class="z-ok"></i><i class="z-over"></i></div>
+            <div class="marker" id="marker"></div>
+          </div>
+          <div class="zones" aria-hidden="true"><span>Raw</span><span>Just right</span><span>Overcooked</span></div>
+        </div>
+        <div class="actions"><button class="btn" type="button" id="stopBtn">Start cooking</button></div>
+        <div class="foot">
+          <p class="fb" id="fb4" role="status" aria-live="polite"></p>
+          <button class="btn next" type="button" id="next4" hidden>Serve it &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finish -->
+    <div class="panel s5" id="p5" hidden>
+      <div class="art">
+        <svg viewBox="0 0 240 185" role="img" aria-label="A finished burger on a plate, surrounded by sparkles.">
+          <ellipse cx="120" cy="152" rx="86" ry="14" fill="#fff" stroke="var(--line)" stroke-width="3"/>
+          <g transform="translate(12 -22) scale(1.8)">
+            <g transform="translate(0 6)">
+              <path d="M30 50Q30 30 60 30Q90 30 90 50z" fill="#FFC773"/>
+              <ellipse cx="46" cy="41" rx="3" ry="1.8" fill="#fff" transform="rotate(-20 46 41)"/>
+              <ellipse cx="60" cy="37" rx="3" ry="1.8" fill="#fff"/>
+              <ellipse cx="74" cy="41" rx="3" ry="1.8" fill="#fff" transform="rotate(20 74 41)"/>
+              <path d="M27 52q6 7 12 0t12 0t12 0t12 0t12 0v5H27z" fill="#7BD389"/>
+              <rect x="28" y="58" width="64" height="13" rx="6.5" fill="#7A3E2E"/>
+              <path d="M30 74h60q0 12-12 12H42q-12 0-12-12z" fill="#FFC773"/>
+            </g>
+          </g>
+          <path class="sparkle" d="M36 30l2.6 7.4L46 40l-7.4 2.6L36 50l-2.6-7.4L26 40l7.4-2.6z"/>
+          <path class="sparkle" d="M204 44l2.2 6.3 6.3 2.2-6.3 2.2L204 61l-2.2-6.3-6.3-2.2 6.3-2.2z"/>
+          <path class="sparkle" d="M196 128l1.8 5.2 5.2 1.8-5.2 1.8L196 142l-1.8-5.2-5.2-1.8 5.2-1.8z"/>
+          <path class="sparkle" d="M40 118l1.8 5.2 5.2 1.8-5.2 1.8L40 132l-1.8-5.2-5.2-1.8 5.2-1.8z"/>
+        </svg>
+      </div>
+      <div class="talk">
+        <h3 tabindex="-1">Burger served!</h3>
+        <p>You just made cultured meat, step by step.</p>
+        <ul class="recap">
+          <li class="s1"><span class="chk"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Collect:</b> a tiny, harmless cell sample from a cow.</span></li>
+          <li class="s2"><span class="chk"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Grow:</b> cells eat nutrient broth in a warm tank and multiply.</span></li>
+          <li class="s3"><span class="chk"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Build:</b> cells cling to a scaffold and grow into muscle fibers.</span></li>
+          <li class="s4"><span class="chk"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Cook:</b> the muscle is shaped into a patty and cooked.</span></li>
+        </ul>
+        <p class="note">Growing cells is still expensive, so many companies plan to mix a little cultured meat with plant-based ingredients to make a hybrid burger.</p>
+        <div class="actions"><button class="btn soft" type="button" id="again">Play again</button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var trail = document.getElementById('trail');
+  var svg = document.getElementById('trailPath');
+  var paths = svg.querySelectorAll('path');
+  var stops = Array.prototype.slice.call(trail.querySelectorAll('.stop'));
+
+  document.querySelectorAll('.icon').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.closest('.stop').classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  function draw() {
+    var t = trail.getBoundingClientRect();
+    svg.setAttribute('width', t.width);
+    svg.setAttribute('height', t.height);
+    svg.setAttribute('viewBox', '0 0 ' + t.width + ' ' + t.height);
+    var d = '';
+    for (var i = 0; i < stops.length - 1; i++) {
+      var a = stops[i].querySelector('.icon').getBoundingClientRect();
+      var b = stops[i + 1].querySelector('.icon').getBoundingClientRect();
+      var ra = stops[i].getBoundingClientRect();
+      var rb = stops[i + 1].getBoundingClientRect();
+      var x1 = a.left + a.width / 2 - t.left;
+      var x2 = b.left + b.width / 2 - t.left;
+      var y1 = a.bottom - t.top - 6;
+      var y2 = b.top - t.top + 6;
+      var yg = (ra.bottom + rb.top) / 2 - t.top;
+      if (Math.abs(x1 - x2) < 2) {
+        d += 'M' + x1 + ' ' + y1 + 'V' + y2;
+      } else {
+        var r = Math.max(4, Math.min(44, yg - y1, y2 - yg, Math.abs(x2 - x1) / 2));
+        var dir = x2 > x1 ? 1 : -1;
+        d += 'M' + x1 + ' ' + y1 + 'V' + (yg - r) +
+          'Q' + x1 + ' ' + yg + ' ' + (x1 + dir * r) + ' ' + yg +
+          'H' + (x2 - dir * r) +
+          'Q' + x2 + ' ' + yg + ' ' + x2 + ' ' + (yg + r) +
+          'V' + y2;
+      }
+    }
+    paths.forEach(function (p) { p.setAttribute('d', d); });
+  }
+
+  draw();
+  window.addEventListener('resize', draw);
+  window.addEventListener('load', draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  if (window.ResizeObserver) new ResizeObserver(draw).observe(trail);
+})();
+</script>
+
+<script>
+/* Lab mini game */
+(function () {
+  var lab = document.getElementById('lab');
+  if (!lab) return;
+  function $(id) { return document.getElementById(id); }
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var panels = Array.prototype.slice.call(lab.querySelectorAll('.panel'));
+  var chips = Array.prototype.slice.call(lab.querySelectorAll('.steps li'));
+
+  /* Step 1 */
+  var p1 = $('p1'), sampleBtn = $('sampleBtn'), fb1 = $('fb1'), next1 = $('next1');
+
+  /* Step 2: cells appear from the middle of the tank outward */
+  var NS = 'http://www.w3.org/2000/svg';
+  var MAX_CELLS = 32, count = 1;
+  var cellCount = $('cellCount'), feedBtn = $('feedBtn'), fb2 = $('fb2'), next2 = $('next2'), drop = $('drop');
+  var spots = [];
+  for (var r = 0; r < 4; r++) for (var c = 0; c < 8; c++) spots.push({ x: 71 + c * 14, y: 88 + r * 16 });
+  function dist(s) { var dx = s.x - 120, dy = s.y - 112; return dx * dx + dy * dy; }
+  spots.sort(function (a, b) { return dist(a) - dist(b); });
+  var cellEls = spots.map(function (s) {
+    var g = document.createElementNS(NS, 'g');
+    g.setAttribute('transform', 'translate(' + s.x + ' ' + s.y + ')');
+    var inner = document.createElementNS(NS, 'g');
+    inner.setAttribute('class', 'cell');
+    var body = document.createElementNS(NS, 'circle');
+    body.setAttribute('r', '5.8');
+    var nuc = document.createElementNS(NS, 'circle');
+    nuc.setAttribute('r', '1.9'); nuc.setAttribute('cx', '1'); nuc.setAttribute('cy', '-1'); nuc.setAttribute('class', 'nuc');
+    inner.appendChild(body); inner.appendChild(nuc); g.appendChild(inner);
+    $('cells').appendChild(g);
+    return inner;
+  });
+  function renderCells() {
+    cellEls.forEach(function (el, i) { el.classList.toggle('on', i < count); });
+    cellCount.textContent = count;
+  }
+
+  /* Step 3 */
+  var fibers = Array.prototype.slice.call(lab.querySelectorAll('.fiber'));
+  var grownEl = $('grown'), fb3 = $('fb3'), next3 = $('next3'), grown = 0;
+  function fiberText(i, done) { return 'Strand ' + (i + 1) + ' · ' + (done ? 'muscle fiber grown' : 'tap to add cells'); }
+
+  /* Step 4: a marker sweeps across the meter; stop it in the green zone */
+  var ZA = 0.45, ZB = 0.70;
+  var PERIOD = reduce ? 6400 : 4400;
+  var marker = $('marker'), patty = $('patty'), stopBtn = $('stopBtn'), fb4 = $('fb4'), next4 = $('next4');
+  var RAW = [244, 160, 168], DONE = [139, 74, 43], BURNT = [42, 29, 24];
+  var running = false, raf = 0, t0 = 0, pos = 0, mode = 'start';
+  function mix(a, b, t) {
+    return 'rgb(' + [0, 1, 2].map(function (i) { return Math.round(a[i] + (b[i] - a[i]) * t); }).join(',') + ')';
+  }
+  function pattyColor(p) { return p < 0.55 ? mix(RAW, DONE, p / 0.55) : mix(DONE, BURNT, (p - 0.55) / 0.45); }
+  function setPos(p) {
+    pos = p;
+    marker.style.left = (p * 100) + '%';
+    patty.style.fill = pattyColor(p);
+  }
+  function tick(now) {
+    if (!running) return;
+    var x = (Math.max(0, now - t0) % PERIOD) / PERIOD * 2;
+    setPos(x < 1 ? x : 2 - x);
+    raf = requestAnimationFrame(tick);
+  }
+  function stopCook() { running = false; cancelAnimationFrame(raf); }
+  function beginCook() {
+    fb4.textContent = '';
+    mode = 'run';
+    stopBtn.textContent = 'Stop!';
+    running = true;
+    t0 = performance.now();
+    raf = requestAnimationFrame(tick);
+  }
+  function endCook() {
+    stopCook();
+    if (pos >= ZA && pos <= ZB) {
+      mode = 'done';
+      fb4.textContent = 'Just right! Juicy and ready to eat.';
+      stopBtn.disabled = true;
+      next4.hidden = false;
+      next4.focus();
+    } else {
+      mode = 'retry';
+      fb4.textContent = pos < ZA ? 'Still raw in the middle. Try again!' : 'Overcooked and dry. Try again!';
+      stopBtn.textContent = 'Try again';
+    }
+  }
+
+  /* Moving between steps */
+  var current = 0;
+  function show(i, focus) {
+    current = i;
+    panels.forEach(function (p, k) { p.hidden = k !== i; });
+    chips.forEach(function (chip, k) {
+      chip.classList.toggle('done', k < i);
+      chip.classList.toggle('current', k === i);
+      if (k === i) chip.setAttribute('aria-current', 'step'); else chip.removeAttribute('aria-current');
+    });
+    stopCook();
+    if (focus) {
+      var h = panels[i].querySelector('h3');
+      if (h) h.focus({ preventScroll: true });
+    }
+  }
+
+  sampleBtn.addEventListener('click', function () {
+    p1.classList.add('got');
+    sampleBtn.disabled = true;
+    fb1.textContent = 'Sample collected! Just a few cells is all it takes.';
+    next1.hidden = false;
+    next1.focus();
+  });
+
+  feedBtn.addEventListener('click', function () {
+    if (count >= MAX_CELLS) return;
+    count *= 2;
+    renderCells();
+    drop.classList.remove('fall');
+    void drop.getBoundingClientRect();
+    drop.classList.add('fall');
+    if (count >= MAX_CELLS) {
+      feedBtn.disabled = true;
+      fb2.textContent = 'The tank is full! 1 cell turned into 32.';
+      next2.hidden = false;
+      next2.focus();
+    } else {
+      fb2.textContent = 'The cells split and doubled.';
+    }
+  });
+
+  fibers.forEach(function (f, i) {
+    f.addEventListener('click', function () {
+      if (f.classList.contains('done')) return;
+      f.classList.add('done');
+      f.disabled = true;
+      f.querySelector('.lbl').textContent = fiberText(i, true);
+      grown += 1;
+      grownEl.textContent = grown;
+      if (grown === fibers.length) {
+        fb3.textContent = 'All five fibers are grown. That is real muscle!';
+        next3.hidden = false;
+        next3.focus();
+      }
+    });
+  });
+
+  stopBtn.addEventListener('click', function () {
+    if (mode === 'start' || mode === 'retry') beginCook();
+    else if (mode === 'run') endCook();
+  });
+
+  [next1, next2, next3, next4].forEach(function (b) {
+    b.addEventListener('click', function () { show(current + 1, true); });
+  });
+
+  function resetAll() {
+    p1.classList.remove('got');
+    sampleBtn.disabled = false; fb1.textContent = ''; next1.hidden = true;
+    count = 1; renderCells(); feedBtn.disabled = false; fb2.textContent = ''; next2.hidden = true;
+    drop.classList.remove('fall');
+    fibers.forEach(function (f, i) {
+      f.classList.remove('done'); f.disabled = false;
+      f.querySelector('.lbl').textContent = fiberText(i, false);
+    });
+    grown = 0; grownEl.textContent = '0'; fb3.textContent = ''; next3.hidden = true;
+    stopCook(); setPos(0); mode = 'start';
+    stopBtn.textContent = 'Start cooking'; stopBtn.disabled = false; fb4.textContent = ''; next4.hidden = true;
+    show(0, true);
+  }
+  $('again').addEventListener('click', resetAll);
+
+  renderCells();
+  setPos(0);
+})();
+</script>
+
+</body>
+</html>
